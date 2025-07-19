@@ -1,186 +1,87 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>INtegritas Hakim</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pendaftaran Hakim Integritas</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.postimg.cc/WzWQGcM7/Screenshot-2025-07-19-150110.png');
+      background-image: url('https://i.postimg.cc/WzWQGcM7/Screenshot-2025-07-19-150110.png');
       background-size: cover;
-      background-attachment: fixed;
+      background-position: center;
+      font-family: Arial, sans-serif;
       color: #fff;
+      text-align: center;
+      padding-top: 50px;
     }
-
-    .container {
-      background: rgba(0, 0, 0, 0.7);
+    .form-container {
+      background-color: rgba(0, 0, 0, 0.7);
       padding: 30px;
-      max-width: 600px;
-      margin: 50px auto;
       border-radius: 15px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+      width: 90%;
+      max-width: 500px;
+      margin: auto;
     }
-
-    h1 {
-      text-align: center;
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    input, textarea {
+    input, textarea, button {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
+      padding: 10px;
+      margin-top: 15px;
       border: none;
       border-radius: 8px;
+      font-size: 16px;
     }
-
     button {
-      margin-top: 20px;
-      padding: 10px;
-      width: 100%;
-      background-color: gold;
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    table {
-      width: 100%;
-      margin-top: 20px;
-      background: white;
-      color: black;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    table, th, td {
-      border-collapse: collapse;
-      padding: 10px;
-      text-align: left;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      font-style: italic;
+      background-color: #28a745;
       color: white;
-      font-size: 14px;
-    }
-
-    #tabel-container {
-      display: none;
-      margin-top: 30px;
-    }
-
-    #password-area {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    #password-input {
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-    }
-
-    #check-password {
-      padding: 8px 12px;
-      border-radius: 8px;
-      background-color: gold;
-      border: none;
-      cursor: pointer;
       font-weight: bold;
-      margin-left: 8px;
+      cursor: pointer;
+    }
+    .success-message {
+      margin-top: 20px;
+      color: #00ff00;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>INtegritas Hakim</h1>
-
-    <form id="form-daftar">
-      <label>Nama:</label>
-      <input type="text" id="nama" required>
-
-      <label>Pengalaman:</label>
-      <textarea id="pengalaman" required></textarea>
-
-      <label>Umur:</label>
-      <input type="number" id="umur" required>
-
-      <label>Alasan:</label>
-      <textarea id="alasan" required></textarea>
-
-      <button type="submit">Daftar</button>
+  <div class="form-container">
+    <h2>Formulir Pendaftaran Hakim</h2>
+    <form id="hakimForm">
+      <input type="text" name="nama" placeholder="Nama Lengkap" required />
+      <textarea name="alasan" placeholder="Alasan Mengikuti" rows="3" required></textarea>
+      <textarea name="pengalaman" placeholder="Pengalaman Terkait Hukum/Keadilan" rows="4" required></textarea>
+      <button type="submit">Kirim Pendaftaran</button>
+      <div class="success-message" id="successMsg" style="display: none;">✅ Pendaftaran berhasil dikirim!</div>
     </form>
-
-    <div id="password-area">
-      <input type="password" id="password-input" placeholder="🔒 Masukkan password">
-      <button id="check-password">Lihat Tabel</button>
-    </div>
-
-    <div id="tabel-container">
-      <table id="tabel-pendaftar">
-        <thead>
-          <tr>
-            <th>Nama</th>
-            <th>Pengalaman</th>
-            <th>Umur</th>
-            <th>Alasan</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-
-    <footer>
-      Humas INtegritas Hakim dilindungi hak cipta
-    </footer>
   </div>
 
   <script>
-    const form = document.getElementById("form-daftar");
-    const tabelBody = document.querySelector("#tabel-pendaftar tbody");
-    const passwordInput = document.getElementById("password-input");
-    const checkPasswordBtn = document.getElementById("check-password");
-    const tabelContainer = document.getElementById("tabel-container");
+    const form = document.getElementById('hakimForm');
+    const successMsg = document.getElementById('successMsg');
 
-    form.addEventListener("submit", function (e) {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
+      const data = {
+        nama: form.nama.value,
+        alasan: form.alasan.value,
+        pengalaman: form.pengalaman.value
+      };
 
-      const nama = document.getElementById("nama").value;
-      const pengalaman = document.getElementById("pengalaman").value;
-      const umur = document.getElementById("umur").value;
-      const alasan = document.getElementById("alasan").value;
-
-      const row = tabelBody.insertRow();
-      row.insertCell(0).textContent = nama;
-      row.insertCell(1).textContent = pengalaman;
-      row.insertCell(2).textContent = umur;
-      row.insertCell(3).textContent = alasan;
-
-      form.reset();
-      alert("Pendaftaran berhasil!");
-    });
-
-    checkPasswordBtn.addEventListener("click", function () {
-      const pass = passwordInput.value;
-      if (pass === "integritashakim25") {
-        tabelContainer.style.display = "block";
-      } else {
-        alert("Password salah!");
-      }
+      fetch('YOUR_WEB_APP_URL', { // Ganti ini!
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(() => {
+        form.reset();
+        successMsg.style.display = 'block';
+        setTimeout(() => successMsg.style.display = 'none', 5000);
+      }).catch(error => {
+        alert("Gagal mengirim. Coba lagi.");
+        console.error(error);
+      });
     });
   </script>
 </body>
