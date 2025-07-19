@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>INtegritas Hakim</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://i.postimg.cc/WzWQGcM7/Screenshot-2025-07-19-150110.png');
+      background-size: cover;
+      background-attachment: fixed;
+      color: #fff;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      max-width: 600px;
+      margin: 50px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background-color: gold;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      background: white;
+      color: black;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    table, th, td {
+      border-collapse: collapse;
+      padding: 10px;
+      text-align: left;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-style: italic;
+      color: white;
+      font-size: 14px;
+    }
+
+    #tabel-container {
+      display: none;
+      margin-top: 30px;
+    }
+
+    #password-area {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #password-input {
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    #check-password {
+      padding: 8px 12px;
+      border-radius: 8px;
+      background-color: gold;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>INtegritas Hakim</h1>
+
+    <form id="form-daftar">
+      <label>Nama:</label>
+      <input type="text" id="nama" required>
+
+      <label>Pengalaman:</label>
+      <textarea id="pengalaman" required></textarea>
+
+      <label>Umur:</label>
+      <input type="number" id="umur" required>
+
+      <label>Alasan:</label>
+      <textarea id="alasan" required></textarea>
+
+      <button type="submit">Daftar</button>
+    </form>
+
+    <div id="password-area">
+      <input type="password" id="password-input" placeholder="🔒 Masukkan password">
+      <button id="check-password">Lihat Tabel</button>
+    </div>
+
+    <div id="tabel-container">
+      <table id="tabel-pendaftar">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Pengalaman</th>
+            <th>Umur</th>
+            <th>Alasan</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <footer>
+      Humas INtegritas Hakim dilindungi hak cipta
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById("form-daftar");
+    const tabelBody = document.querySelector("#tabel-pendaftar tbody");
+    const passwordInput = document.getElementById("password-input");
+    const checkPasswordBtn = document.getElementById("check-password");
+    const tabelContainer = document.getElementById("tabel-container");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nama = document.getElementById("nama").value;
+      const pengalaman = document.getElementById("pengalaman").value;
+      const umur = document.getElementById("umur").value;
+      const alasan = document.getElementById("alasan").value;
+
+      const row = tabelBody.insertRow();
+      row.insertCell(0).textContent = nama;
+      row.insertCell(1).textContent = pengalaman;
+      row.insertCell(2).textContent = umur;
+      row.insertCell(3).textContent = alasan;
+
+      form.reset();
+      alert("Pendaftaran berhasil!");
+    });
+
+    checkPasswordBtn.addEventListener("click", function () {
+      const pass = passwordInput.value;
+      if (pass === "integritashakim25") {
+        tabelContainer.style.display = "block";
+      } else {
+        alert("Password salah!");
+      }
+    });
+  </script>
+</body>
+</html>
